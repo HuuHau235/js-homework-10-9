@@ -1,0 +1,84 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>New Product</title>
+    <style type="text/css">
+        table {
+            width: 600px;
+            border-spacing: 0;
+            border: 1px solid #bbb;
+        }
+        #tbl tr {
+            height: 27px;
+        }
+        #tbl tr th, #tbl tr td {
+            text-align: left;
+            border-bottom: 1px solid #ccc;
+        }
+        #tbl tr:last-child td {
+            border: none;
+        }
+    </style>
+</head>
+<body>
+    <h1>New Product</h1>
+    <form name="frm">
+        <div>
+            <label>Product Name:
+            <input type="text" id="pname"></label>
+            <label>Quantity:
+            <input type="number" id="qty"></label>
+        </div>
+        <div>
+            <label>Unit Price:
+            <input type="number" id="up"></label>
+            <label>Discount (%):
+            <input type="number" id="dc"></label>
+        </div>
+        <div>
+            <button type="button" onclick="sell()">Sell</button>
+            <button type="button">Cancel</button>
+        </div>
+    </form>
+    <table id="tbl">
+        <thead>
+            <tr>
+                <th>ID</th>
+                <th>Product Name</th>
+                <th>Quantity</th>
+                <th>Unit Price</th>
+                <th>Discount</th>
+                <th>Subtotal</th>
+            </tr>
+        </thead>
+        <tbody>
+        </tbody>
+    </table>
+    <script type="text/javascript">
+        var id = 0;
+        function sell() {
+            id++;
+            var pname = document.getElementById('pname').value;
+            var qty = parseInt(document.getElementById('qty').value);
+            var price = parseInt(document.getElementById('up').value);
+            var dc = parseInt(document.getElementById('dc').value);
+            var sub = qty * price * (1 - dc / 100);
+            var row = "<tr>";
+            row += "<td>" + id + "</td>";
+            row += "<td>" + pname + "</td>";
+            row += "<td>" + qty + "</td>";
+            row += "<td>" + price + "$</td>";
+            row += "<td>" + dc + "%</td>";
+            row += "<td>" + sub + "$</td>";
+            row += "</tr>";
+            document.getElementById("tbl").getElementsByTagName("tbody")[0].innerHTML += row;
+            document.getElementById('pname').value = '';
+            document.getElementById('qty').value = '';
+            document.getElementById('up').value = '';
+            document.getElementById('dc').value = '';
+        }
+    </script>
+</body>
+</html>
